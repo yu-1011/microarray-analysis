@@ -5,7 +5,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 
 以 GSE35977为例的处理流程
 
-####################################
+####################################  
 一 数据下载
 
 
@@ -81,11 +81,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
 
 
-
-
-
-
-	* 数据过滤[详情见]
+	* 数据过滤
 	* 
 		1. 探针过滤
 
