@@ -30,9 +30,6 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 		3. R 操作进行质量分析(包括a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析 )[详情点击][具体代码]
 		4. 删除有问题的芯片(芯片筛选)
 
-
-
-
 	* 数据预处理[详情见]:
 	* 
 		1. 数据预处理一般有三个步骤: 
@@ -79,7 +76,6 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 		5. 汇总 最后一步汇总是使用合适的统计方法通过probeset（包含多个探针）的杂交信号计算出计算表达量。
 
 			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
-
 
 	* 数据过滤
 	* 
