@@ -1,7 +1,10 @@
 ####
-# Describe: use affy packages to preprocess 450K idat
+# Describe: use affy packages to preprocess .CEL
 # Environment: R 3.3.2
 # Author: Yu Chen (SKLMG)
+# Input:.CEL file
+# Output:Expression matrix
+# R Package requirement: affy, tcltk
 # Data: 2017-08-15
 ####
 
