@@ -110,10 +110,6 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 			* 用impute把missing value按照数据分布补回来 ，数值大小与缺失值周围数值大小有关 Impute.knn()
 			* 其他方法待补充
 
-
-
-
-
 	* 批次校正
 	* 
 		1. 读取探针及样本过滤后文件,检查是否有missing value
@@ -127,5 +123,6 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 
 		3. 利用sva包COMBAT函数进行批次校正
 
-
-
+	* 其他协变量校正[待补充]
+	*
+		1. 
