@@ -9,22 +9,18 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 一 数据下载
 
 
-	1. GEO数据库下载
+		1. GEO数据库下载
 
+		1. 简单版可以直接使用拼接方式[见没有必要用R包] 注:sample information可用matrix中注释行转置,分组信息可在http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
+		2. r包GEOquery
 
-	1. 简单版可以直接使用拼接方式[见没有必要用R包] 注:sample information可用matrix中注释行转置,分组信息可在http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
-	2. r包GEOquery
-
-           getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
+        	getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
 
 二 数据处理
 
 -------------------------------------------------AFFY 预处理---------------------------------------------------------
 
 	* 芯片质量检测
-
-
-	1. 
 		1. 若提供若提供了image file 应对其进行观察，看是否有因实验操作不当而产生的气泡 (最直接的质量控制)
 		2. 下载所有原始文件(.CEL)并解压到统一同一文件夹中
 		3. R 操作进行质量分析(包括a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析 )[详情点击][具体代码]
@@ -66,30 +62,30 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 		* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
 
 	* 数据过滤
-	1. 探针过滤
+		1. 探针过滤
 		* 去掉含SNP的探针[在哪里下载? 官网下载]
 		* detection- P<0.06的数据量≥80%[]
-	2. 样本过滤
+		2. 样本过滤
 		* 利用PCA对样本进行主成分分析, 删除outliar
-	3. 去掉AFFX开头的做质控的探针
+		3. 去掉AFFX开头的做质控的探针
 		* genefilter 包中 nsFilter函数，注意参数设置
-	4. 去掉探针匹配效果不佳的探针
+		4. 去掉探针匹配效果不佳的探针
 		* 在芯片的annotation file 中找到探针匹配效果不佳探针
-	5. 去掉gene-assignement为空的数据
-	6. impute missing value
+		5. 去掉gene-assignement为空的数据
+		6. impute missing value
 		* x[is.na(x)]=0.0001 就是把missing value替换成0.0001;
 		* 用impute把missing value按照数据分布补回来 ，数值大小与缺失值周围数值大小有关 Impute.knn()
 		* 其他方法待补充
 
 	* 批次校正
-	1. 读取探针及样本过滤后文件,检查是否有missing value
+		1. 读取探针及样本过滤后文件,检查是否有missing value
 		* missing value 处理方法：imputation
-	2. 制作batch文件【利用excel】
+		2. 制作batch文件【利用excel】
 		* 复制sample名
 		* 转置粘贴到新的工作表【使得原本一行的数据放到一列】
 		* 观察sample名，利用数据-分列-分隔符选择“_”进行分列
 		* 删除其他信息，保存为.txt文件
-	3. 利用sva包COMBAT函数进行批次校正
+		3. 利用sva包COMBAT函数进行批次校正
 	
 	* 其他协变量校正[待补充]
-	1. 
+		1. 
