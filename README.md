@@ -59,7 +59,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 				* 芯片内的数据标准化，主要是去除每张芯片的系统误差，这种误差主要是由荧光染色差异，点样机器(arrayer print-tip)，或者杂交试验所产生的，通过标准化，使每个基因的表达点都具有独立性。
 
 		5. 汇总 最后一步汇总是使用合适的统计方法通过probeset（包含多个探针）的杂交信号计算出计算表达量。
-		* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
+			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
 
 	* 数据过滤
 		1. 探针过滤
