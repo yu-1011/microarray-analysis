@@ -2,7 +2,6 @@
 From .CEL to expression matrix  
 This document is a pre-proposs pipeline of Affymetrix microarray.
 
-
 以 GSE35977为例的处理流程
 
 ####################################  
