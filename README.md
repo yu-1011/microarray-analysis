@@ -36,9 +36,10 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 
 			* rma  
 				* RMA方法的原理比较复杂，  
-				可以参看文献：R. A. Irizarry, B. Hobbs, F. Collin, et al. 
-				Exploration, normalization, and summaries of high density oligonucleotide array probe level data. Biostatistics,   
-				4:249–64, 2003b. 11, 18, 27, 232, 241, 432, 443。
+				可以参看文献：  
+				R. A. Irizarry, B. Hobbs, F. Collin, et al. 
+				Exploration, normalization, and summaries of high density oligonucleotide array probe   
+				level data. Biostatistics, 4:249–64, 2003b. 11, 18, 27, 232, 241, 432, 443。
 				* RMA方法仅使用PM探针数据，背景调整后MM的信号值不变。
 				* 得到表达量的信息
 
