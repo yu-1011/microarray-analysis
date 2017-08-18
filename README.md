@@ -8,11 +8,10 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 一 数据下载
 
 		1. GEO数据库下载
-
-		1. 简单版可以直接使用拼接方式 注:sample information可用matrix中注释行转置  
-		分组信息可http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
+			1. 简单版可以直接使用拼接方式 注:sample information可用matrix中注释行转置  
+			   分组信息可http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
 		2. r包GEOquery
-        	getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
+        		getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
 
 二 数据处理
 
@@ -21,7 +20,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 	* 芯片质量检测
 		1. 若提供若提供了image file 应对其进行观察，看是否有因实验操作不当而产生的气泡 (最直接的质量控制)
 		2. 下载所有原始文件(.CEL)并解压到统一同一文件夹中
-		3. R 操作进行质量分析(包括a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析 )[详情点击][具体代码]
+		3. R 操作进行质量分析(包括a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析 )
 		4. 删除有问题的芯片(芯片筛选)
 
 	* 数据预处理[详情见]:
