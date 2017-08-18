@@ -20,7 +20,8 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 	* 芯片质量检测
 		1. 若提供若提供了image file 应对其进行观察，看是否有因实验操作不当而产生的气泡 (最直接的质量控制)
 		2. 下载所有原始文件(.CEL)并解压到统一同一文件夹中
-		3. R 操作进行质量分析(包括a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析 )
+		3. R 操作进行质量分析
+		     a. 芯片扫描图像（灰度 ）b.灰度值箱线图 c. histogram曲线 d. MA-plot分析 e. RNA降解分析
 		4. 删除有问题的芯片(芯片筛选)
 
 	* 数据预处理[详情见]:
@@ -43,7 +44,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 				* 得到表达量的信息
 
 			* Mas5
-				* MAS方法将芯片分为k（默认值为16）个网格区域，用每个区域使用信号强度最低的2%探针去计算背景值和噪声。
+				* MAS方法将芯片分为k（默认值为16）个网格区域，用每个区域使用信号强度最低的2%探针去计算背景值和噪声
 				* MAS方法应用后PM和MM的信号强度都被重新计算。
 				* 得到detection p-value
 
@@ -73,7 +74,7 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 
 		5. 汇总 最后一步汇总是使用合适的统计方法通过probeset（包含多个探针）的杂交信号计算出计算表达量。
 			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式   
-			  常用的汇总方法是medianpolish, liwong和mas. liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
+			  常用的汇总方法是medianpolish, liwong和mas. liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly")
 
 	* 数据过滤
 		1. 探针过滤
