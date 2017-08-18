@@ -10,7 +10,8 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 
 		1. GEO数据库下载
 
-		1. 简单版可以直接使用拼接方式 注:sample information可用matrix中注释行转置,分组信息可http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
+		1. 简单版可以直接使用拼接方式 注:sample information可用matrix中注释行转置  
+		分组信息可http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
 		2. r包GEOquery
         	getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
 
