@@ -8,12 +8,10 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 ####################################  
 一 数据下载
 
-
 		1. GEO数据库下载
 
-		1. 简单版可以直接使用拼接方式[见没有必要用R包] 注:sample information可用matrix中注释行转置,分组信息可在http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
+		1. 简单版可以直接使用拼接方式 注:sample information可用matrix中注释行转置,分组信息可http://www.ncbi.nlm.nih.gov/geo/browse/?view=samples&series=#GSE号码#&mode=csv下载 
 		2. r包GEOquery
-
         	getGEO(GEO = NULL, filename = NULL, destdir = tempdir(), GSElimits=NULL,GSEMatrix=TRUE,AnnotGPL=FALSE)
 
 二 数据处理
@@ -37,29 +35,29 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 		3. 背景处理 
 
 			* rma  
-			* RMA方法的原理比较复杂，可以参看文献：R. A. Irizarry, B. Hobbs, F. Collin, et al. Exploration, normalization, and summaries of high density oligonucleotide array probe level data. Biostatistics, 4:249–64, 2003b. 11, 18, 27, 232, 241, 432, 443。
-			* RMA方法仅使用PM探针数据，背景调整后MM的信号值不变。
-			* 得到表达量的信息
+				* RMA方法的原理比较复杂，可以参看文献：R. A. Irizarry, B. Hobbs, F. Collin, et al. Exploration, normalization, and summaries of high density oligonucleotide array probe level data. Biostatistics, 4:249–64, 2003b. 11, 18, 27, 232, 241, 432, 443。
+				* RMA方法仅使用PM探针数据，背景调整后MM的信号值不变。
+				* 得到表达量的信息
 
 			* Mas5
-			* MAS方法将芯片分为k（默认值为16）个网格区域，用每个区域使用信号强度最低的2%探针去计算背景值和噪声。
-			* MAS方法应用后PM和MM的信号强度都被重新计算。
-			* 得到detection p-value
+				* MAS方法将芯片分为k（默认值为16）个网格区域，用每个区域使用信号强度最低的2%探针去计算背景值和噪声。
+				* MAS方法应用后PM和MM的信号强度都被重新计算。
+				* 得到detection p-value
 
 		4. 归一化处理(根据具体情况进行选择)
 
 			* 线性缩放方法
-			* 线性缩放方法以第一块芯片为参考，它的数值没有被处理，而其他芯片都被缩放了。对同一块芯片，不同探针的缩放倍数是一个常数。PM和MM的缩放方法完全一样。这是Affy公司在其软件（4.0和5.0版本）中使用的方法。这种方法先选择一个芯片作为参考，将其他芯片和参考芯片逐一做线性回归分析，用回归直线（没有截距）对其他芯片的信号值做缩放。Affy公司的软件做回归分析前去除了2%最强和最弱信号。
+				* 线性缩放方法以第一块芯片为参考，它的数值没有被处理，而其他芯片都被缩放了。对同一块芯片，不同探针的缩放倍数是一个常数。PM和MM的缩放方法完全一样。这是Affy公司在其软件（4.0和5.0版本）中使用的方法。这种方法先选择一个芯片作为参考，将其他芯片和参考芯片逐一做线性回归分析，用回归直线（没有截距）对其他芯片的信号值做缩放。Affy公司的软件做回归分析前去除了2%最强和最弱信号。
 			* 非线性缩放方法
-			* 非线性拟合时不是取整张芯片而仅取部分（一列）作为基线。它的数值没有被处理，而其他数据都被缩放了。
+				* 非线性拟合时不是取整张芯片而仅取部分（一列）作为基线。它的数值没有被处理，而其他数据都被缩放了。
 
 			* 分位数（quantile）方法--分位数标准化（Quantile Normalization）
-			* 一般芯片的杂交实验很容易产生误差，所以经常一个样本要做 3~6 次的重复实验。平行实验间的数据差异可以通过 Quantile Normalization去处掉。总平行实验的前提条件是假设 n次实验的数据具有相同的分布，其算法主要分为三步：（1）对每张芯片的数据点排序。（2）求出同一位置的几次重复实验数据的均值，并用该均值代替该位置的基因的表达量。（3）将每个基因还原到本身的位置上。
+				* 一般芯片的杂交实验很容易产生误差，所以经常一个样本要做 3~6 次的重复实验。平行实验间的数据差异可以通过 Quantile Normalization去处掉。总平行实验的前提条件是假设 n次实验的数据具有相同的分布，其算法主要分为三步：（1）对每张芯片的数据点排序。（2）求出同一位置的几次重复实验数据的均值，并用该均值代替该位置的基因的表达量。（3）将每个基因还原到本身的位置上。
 			* 其他 （如循环局部加权回归法（Cyclic loess）和 Contrasts方法）
 				* 芯片内的数据标准化，主要是去除每张芯片的系统误差，这种误差主要是由荧光染色差异，点样机器(arrayer print-tip)，或者杂交试验所产生的，通过标准化，使每个基因的表达点都具有独立性。
 
 		5. 汇总 最后一步汇总是使用合适的统计方法通过probeset（包含多个探针）的杂交信号计算出计算表达量。
-			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas。liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
+			* 需要注意的是computeExprSet函数除需要指定统计方法外还需要指定PM校正的方式 常用的汇总方法是medianpolish, liwong和mas. liwong方法仅使用PM做背景校正（pmcorrect.method="pmonly"）。
 
 	* 数据过滤
 		1. 探针过滤
