@@ -88,4 +88,4 @@ This document is a pre-proposs pipeline of Affymetrix microarray.
 		3. 利用sva包COMBAT函数进行批次校正
 	
 	* 其他协变量校正[待补充]
-		1. 
+		1. 利用线性回归lm()对其他协变量进行校正
